@@ -1,6 +1,6 @@
 [package]
 name = "snowlog"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2024"
 authors = ["snowmerak <snowmerak@outlook.com>"]
 description = "A structured logging library for Rust with JSON output and rotation support"

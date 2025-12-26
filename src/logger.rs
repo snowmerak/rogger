@@ -25,6 +25,13 @@ static LEVEL: OnceLock<LogLevel> = OnceLock::new();
 static SERVICE: OnceLock<String> = OnceLock::new();
 static WRITER: OnceLock<Mutex<Box<dyn Writer + Send>>> = OnceLock::new();
 
+#[macro_export]
+macro_rules! payload {
+    ($($tt:tt)*) => {
+        serde_json::json!($($tt)*)
+    };
+}
+
 pub struct Logger;
 
 impl Logger {
