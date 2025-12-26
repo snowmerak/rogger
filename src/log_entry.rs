@@ -20,4 +20,14 @@ impl LogEntry {
             payload,
         }
     }
+
+    /// Serialize the LogEntry to a JSON string.
+    pub fn to_json_string(&self) -> Result<String, serde_json::Error> {
+        serde_json::to_string(self)
+    }
+
+    /// Serialize the LogEntry to JSON bytes.
+    pub fn to_json_bytes(&self) -> Result<Vec<u8>, serde_json::Error> {
+        serde_json::to_string(self).map(|s| s.into_bytes())
+    }
 }
