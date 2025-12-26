@@ -6,6 +6,7 @@ pub struct LogEntry {
     pub level: String,
     pub message: String,
     pub timestamp: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub duration: Option<f64>,
     pub payload: serde_json::Value,
 }
