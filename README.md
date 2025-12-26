@@ -1,4 +1,4 @@
-# Rogger
+# Snowlog
 
 A structured logging library for Rust that outputs logs in JSON format with support for log rotation, multiple writers, and global logging.
 
