@@ -1,5 +1,6 @@
 use crate::writer::Writer;
 
+#[derive(Debug)]
 pub struct MultiWriter {
     writers: Vec<Box<dyn Writer>>,
 }

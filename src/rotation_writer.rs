@@ -4,6 +4,7 @@ use std::io::Write;
 use std::path::Path;
 use std::time::{SystemTime, UNIX_EPOCH};
 
+#[derive(Debug)]
 pub struct RotationWriter {
     path: Box<Path>,
     base_filename: String,

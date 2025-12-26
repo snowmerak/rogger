@@ -1,5 +1,6 @@
 use crate::writer::Writer;
 
+#[derive(Debug)]
 pub struct ConsoleWriter;
 
 impl Writer for ConsoleWriter {
