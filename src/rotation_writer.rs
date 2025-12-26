@@ -1,3 +1,4 @@
+use crate::writer::Writer;
 use std::fs::OpenOptions;
 use std::io::Write;
 use std::path::Path;
@@ -22,7 +23,7 @@ impl RotationWriter {
         }
     }
 
-    pub fn write(&mut self, line: &str) -> std::io::Result<()> {
+    pub fn write_line(&mut self, line: &str) -> std::io::Result<()> {
         if self.current_file.is_none() || self.current_lines >= self.max_lines {
             self.rotate()?;
         }
@@ -59,6 +60,12 @@ impl RotationWriter {
     }
 }
 
+impl Writer for RotationWriter {
+    fn write(&mut self, line: &str) -> std::io::Result<()> {
+        self.write_line(line)
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -73,11 +80,11 @@ mod tests {
         let mut writer = RotationWriter::new(&temp_dir, "test.log".to_string(), 3);
 
         // Write lines
-        writer.write("line1").unwrap();
-        writer.write("line2").unwrap();
-        writer.write("line3").unwrap();
+        writer.write_line("line1").unwrap();
+        writer.write_line("line2").unwrap();
+        writer.write_line("line3").unwrap();
         // Should rotate on next write
-        writer.write("line4").unwrap();
+        writer.write_line("line4").unwrap();
 
         // Check that at least two files exist
         let mut files: Vec<_> = fs::read_dir(&temp_dir).unwrap().map(|e| e.unwrap()).collect();
