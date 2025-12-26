@@ -1,0 +1,12 @@
+[package]
+name = "rogger"
+version = "0.1.0"
+edition = "2024"
+authors = ["snowmerak <snowmerak@outlook.com>"]
+description = "A temporary description for the rogger crate"
+license = "MPL-2.0"
+repository = "https://github.com/snowmerak/rogger"
+keywords = ["log", "logger", "rust", "development"]
+categories = ["development-tools"]
+
+[dependencies]
