@@ -6,19 +6,19 @@ pub struct LogEntry {
     pub level: String,
     pub message: String,
     pub timestamp: String,
-    pub duration: Option<u64>,
+    pub duration: Option<f64>,
     pub payload: serde_json::Value,
 }
 
 impl LogEntry {
-    pub fn new(service_name: String, level: String, message: String, payload: serde_json::Value) -> Self {
+    pub fn new(service_name: String, level: String, message: String, payload: serde_json::Value, duration: Option<f64>) -> Self {
         let timestamp = chrono::Utc::now().to_rfc3339();
         LogEntry {
             service_name,
             level,
             message,
             timestamp,
-            duration: None,
+            duration: duration,
             payload,
         }
     }
@@ -46,6 +46,7 @@ mod tests {
             "info".to_string(),
             "test message".to_string(),
             payload.clone(),
+            None,
         );
 
         assert_eq!(entry.service_name, "test_service");
@@ -63,6 +64,7 @@ mod tests {
             "error".to_string(),
             "error occurred".to_string(),
             payload,
+            None,
         );
 
         let json_str = entry.to_json_string().unwrap();
@@ -83,6 +85,7 @@ mod tests {
             "debug".to_string(),
             "byte test".to_string(),
             payload,
+            None,
         );
 
         let bytes = entry.to_json_bytes().unwrap();
